@@ -11,11 +11,6 @@ public class Hex : MonoBehaviour
         transform.position = MapPositionToWorldPosition(position);
     }
 
-    public List<Vector2Int> GetNeighborPositions()
-    {
-        return new List<Vector2Int>() { new Vector2Int(position.x - 1, position.y), new Vector2Int(position.x + 1, position.y) };
-    }
-
     static public Vector2Int WorldPositionToMapPosition(Vector3 worldPosition)
     {
         int y = (int)(worldPosition.z / .85f);
