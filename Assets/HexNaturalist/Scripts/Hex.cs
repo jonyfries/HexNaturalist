@@ -22,7 +22,7 @@ public class Hex : MonoBehaviour
     static public Vector3 MapPositionToWorldPosition(Vector2Int mapPosition)
     {
         float y = mapPosition.y * .85f;
-        float x = mapPosition.x + .5f * (mapPosition.y % 2);
+        float x = mapPosition.x + .5f * Mathf.Abs(mapPosition.y % 2);
 
         return new Vector3(x, 0, y);
     }
