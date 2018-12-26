@@ -13,11 +13,7 @@ public class PlayerMovement : CharacterMovement
     {
         if (Input.GetMouseButtonDown(primaryMouse))
         {
-            print(highlightedHex.neighbors.Count);
-            foreach (Hex hex in mentalMap.GetPath(highlightedHex))
-            {
-                print(hex.gameObject);
-            }
+            if (highlightedHex != null) SetPath(mentalMap.GetPath(highlightedHex));
         }
 
         if (Input.GetMouseButtonDown(middleMouse))

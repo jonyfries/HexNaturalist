@@ -6,16 +6,18 @@ using UnityEngine;
 
 public class HexSelection : MonoBehaviour
 {
-    public HighlightPlus.HighlightEffect highlight; 
+    public HighlightPlus.HighlightEffect highlight;
+    [SerializeField] private Hex hex;
 
     void OnMouseEnter()
     {
         highlight.SetHighlighted(true);
-        PlayerMovement.highlightedHex = gameObject.GetComponent<Hex>();
+        PlayerMovement.highlightedHex = hex;
     }
 
     void OnMouseExit()
     {
         highlight.SetHighlighted(false);
+        if (PlayerMovement.highlightedHex == hex) PlayerMovement.highlightedHex = null;
     }
 }

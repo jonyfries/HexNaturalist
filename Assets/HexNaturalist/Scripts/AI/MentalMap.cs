@@ -11,7 +11,7 @@ public class MentalMap
     public MentalMap(CharacterMovement characterMovement)
     {
         this.character = characterMovement;
-        AddHex(character.location, 0);
+        AddHex(character.location);
     }
 
     /// <summary>
@@ -19,7 +19,7 @@ public class MentalMap
     /// </summary>
     /// <param name="hex">The new hex the character can think about pathing to.</param>
     /// <returns></returns>
-    private HexNode AddHex(Hex hex, int depth)
+    private HexNode AddHex(Hex hex)
     {
         HexNode hexNode;
 
@@ -38,7 +38,7 @@ public class MentalMap
             {
                 if (!map.ContainsKey(neighbor.position))
                 {
-                    AddHex(neighbor, depth);
+                    AddHex(neighbor);
                 }
 
                 if (!hexNode.HasConnection(map[neighbor.position]))
