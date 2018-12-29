@@ -36,6 +36,10 @@ public class MentalMap
         {
             foreach (Hex neighbor in hex.neighbors)
             {
+                if (!neighbor.walkable)
+                {
+                    continue;
+                }
                 if (!map.ContainsKey(neighbor.position))
                 {
                     AddHex(neighbor);

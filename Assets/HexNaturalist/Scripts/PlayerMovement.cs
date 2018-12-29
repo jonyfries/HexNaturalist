@@ -13,7 +13,7 @@ public class PlayerMovement : CharacterMovement
     {
         if (Input.GetMouseButtonDown(primaryMouse))
         {
-            if (highlightedHex != null) SetPath(mentalMap.GetPath(highlightedHex));
+            if (highlightedHex != null && highlightedHex.walkable) SetPath(mentalMap.GetPath(highlightedHex));
         }
 
         if (Input.GetMouseButtonDown(middleMouse))

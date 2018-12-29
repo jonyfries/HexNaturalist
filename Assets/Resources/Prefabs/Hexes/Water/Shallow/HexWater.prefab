@@ -158,6 +158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highlight: {fileID: 114869955313448986}
+  hex: {fileID: 114349664818634228}
 --- !u!114 &114349664818634228
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -171,7 +172,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 2, y: 3, z: 1}
   entryCost: 0
+  walkable: 0
   isExplored: 0
+  isWater: 1
 --- !u!114 &114869955313448986
 MonoBehaviour:
   m_ObjectHideFlags: 1

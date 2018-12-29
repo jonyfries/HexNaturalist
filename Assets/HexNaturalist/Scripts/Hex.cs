@@ -6,8 +6,10 @@ public class Hex : MonoBehaviour
 {
     [SerializeField] public Vector3Int position;
     [SerializeField] public int entryCost;
+    [SerializeField] public bool walkable;
     public List<Hex> neighbors { get; private set; }
     public bool isExplored = false;
+    public bool isWater = false;
 
     static private float verticalOffset = 1.5f * (1 / Mathf.Sqrt(3));
     static private float horizontalOffset = 0.5f;
@@ -24,6 +26,37 @@ public class Hex : MonoBehaviour
     {
         position.z = position.y & 1;
         transform.position = MapPositionToWorldPosition(position);
+        neighbors = new List<Hex>();
+    }
+
+    /// <summary>
+    /// Add a new neighbor to the hex.
+    /// </summary>
+    /// <param name="neighbor">Hex to add as a neighbor.</param>
+    public void AddNeighbor(Hex neighbor)
+    {
+        neighbors.Add(neighbor);
+    }
+
+    /// <summary>
+    /// Add a new neighbor to the hex and add this hex as a neighbor to it.
+    /// </summary>
+    /// <param name="neighbor">The neighboring hex</param>
+    public void AddNeighborBidirectional(Hex neighbor)
+    {
+        AddNeighbor(neighbor);
+        neighbor.AddNeighbor(this);
+    }
+
+    /// <summary>
+    /// Return the position when a vector is added to the hexes position.
+    /// </summary>
+    /// <param name="vector">Vector to add.</param>
+    /// <returns>The resulting map position as Vector3Int</returns>
+    public Vector3Int Plus(Vector3Int vector)
+    {
+        int newY = y + vector.y;
+        return new Vector3Int(x + vector.x, newY, newY & 1);
     }
 
     /// <summary>
@@ -36,13 +69,47 @@ public class Hex : MonoBehaviour
     }
 
     /// <summary>
-    /// Add a new neighbor to the hex.
+    /// Provides a list of neighboring locations that do not have a hex in them.
     /// </summary>
-    /// <param name="neighbor">Hex to add as a neighbor.</param>
-    public void AddNeighbor(Hex neighbor)
+    /// <returns>List of map locations without hexes.</returns>
+    public List<Vector3Int> OpenNeighbors()
     {
-        if (neighbors == null) neighbors = new List<Hex>();
-        neighbors.Add(neighbor);
+        int count = neighbors.Count;
+        List<Vector3Int> openList = new List<Vector3Int>();
+
+        foreach (Vector3Int hexPosition in Map.GetNeighborPositionList(this))
+        {
+            if (count == 6) break;
+            bool exists = false;
+
+            foreach (Hex hex in neighbors)
+            {
+                if (hex.position == hexPosition)
+                {
+                    exists = true;
+                    break;
+                }
+            }
+
+            if (!exists)
+            {
+                count += 1;
+                openList.Add(hexPosition);
+            }
+        }
+
+        return openList;
+    }
+
+    /// <summary>
+    /// Give a new position in the map.
+    /// </summary>
+    /// <param name="newPosition">The new hex position</param>
+    public void SetPosition(Vector3Int newPosition)
+    {
+        position = newPosition;
+        position.z = position.y & 1;
+        transform.position = MapPositionToWorldPosition(position);
     }
 
     /// <summary>
