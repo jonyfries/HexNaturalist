@@ -347,7 +347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hexes: []
-  generatedMapSize: 100
+  generatedMapSize: 5
 --- !u!4 &513604230 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4632587508026920, guid: 996ea2a73aa27494c9a25579c8dc8b00,
@@ -622,7 +622,7 @@ Prefab:
     - target: {fileID: 114361005233471940, guid: 596e3df9f6e30a740b2ea12db813056b,
         type: 2}
       propertyPath: isExplored
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114361005233471940, guid: 596e3df9f6e30a740b2ea12db813056b,
         type: 2}
