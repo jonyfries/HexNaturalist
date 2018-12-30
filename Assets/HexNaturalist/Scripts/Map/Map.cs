@@ -229,8 +229,6 @@ public class Map : Singleton<Map>
     {
         List<Vector3Int> neighborList = new List<Vector3Int>();
 
-        List<Vector3Int> offsetList;
-
         foreach (Vector3Int neighbor in neighborDirections[hex.z])
         {
             neighborList.Add(hex.Plus(neighbor));

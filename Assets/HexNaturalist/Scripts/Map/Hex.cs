@@ -7,9 +7,13 @@ public class Hex : MonoBehaviour
     [SerializeField] public Vector3Int position;
     [SerializeField] public int entryCost;
     [SerializeField] public bool walkable;
+    [SerializeField] public float rotateTime;
     public List<Hex> neighbors { get; private set; }
     public bool isExplored = false;
     public bool isWater = false;
+
+    private float rotationPercent = 0;
+    private Quaternion startingRotation;
 
     static private float verticalOffset = 1.5f * (1 / Mathf.Sqrt(3));
     static private float horizontalOffset = 0.5f;
@@ -26,7 +30,18 @@ public class Hex : MonoBehaviour
     {
         position.z = position.y & 1;
         transform.position = MapPositionToWorldPosition(position);
+        startingRotation = transform.rotation;
         neighbors = new List<Hex>();
+    }
+
+    /// <summary>
+    /// Update the hex rotation every frame. Only used for rotating the hex when first explored by the player.
+    /// </summary>
+    void Update()
+    {
+        rotationPercent += Time.deltaTime / rotateTime;
+        transform.rotation = Quaternion.Lerp(startingRotation, Quaternion.Euler(0, 0, 0), rotationPercent);
+        if (rotationPercent >= 1) enabled = false;
     }
 
     /// <summary>
@@ -46,6 +61,15 @@ public class Hex : MonoBehaviour
     {
         AddNeighbor(neighbor);
         neighbor.AddNeighbor(this);
+    }
+
+    /// <summary>
+    /// Marks the hex as explored and causes it to display on the screen.
+    /// </summary>
+    public void Explore()
+    {
+        isExplored = true;
+        enabled = true;
     }
 
     /// <summary>
