@@ -34,7 +34,6 @@ public class Map : Singleton<Map>
         GameObject hexObject = Instantiate(prefab) as GameObject;
         Hex newHex = hexObject.GetComponent<Hex>();
         newHex.SetPosition(location);
-        newHex.isExplored = true;
         hexObject.transform.parent = transform;
 
         return newHex;
@@ -47,6 +46,8 @@ public class Map : Singleton<Map>
     void GenerateMap(int? seed)
     {
         List<Hex> mapFringe = new List<Hex>();
+        List<Hex> waterFringe = new List<Hex>();
+
         Dictionary<Vector3Int, Hex> mapDict = new Dictionary<Vector3Int, Hex>();
         System.Random random;
         if (seed != null) random = new System.Random((int)seed);
@@ -55,11 +56,17 @@ public class Map : Singleton<Map>
         // Generate map fringe
         foreach (Hex mapHex in hexes)
         {
-            if (mapHex.neighbors.Count != 6 && !mapHex.isWater)
+            if (mapHex.neighbors.Count != 6)
             {
-                mapFringe.Add(mapHex);
+                if (!mapHex.isWater)
+                {
+                    mapFringe.Add(mapHex);
+                }
+                else
+                {
+                    waterFringe.Add(mapHex);
+                }
             }
-
             mapDict[mapHex.position] = mapHex;
         }
 
@@ -94,7 +101,6 @@ public class Map : Singleton<Map>
 
         // Generate shallow water around land mass
         prefabList = Resources.LoadAll<GameObject>("Prefabs/Hexes/Water/Shallow").ToList();
-        List<Hex> waterFringe = new List<Hex>();
 
         while (mapFringe.Count != 0)
         {

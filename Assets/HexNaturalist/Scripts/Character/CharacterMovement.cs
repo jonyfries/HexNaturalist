@@ -19,6 +19,7 @@ public class CharacterMovement : MonoBehaviour
     }
     public MentalMap mentalMap;
     public float moveTime = .5f;
+    public CharacterVision characterVision;
 
     [SerializeField] private Hex _location;
     private List<Hex> movementPath;
@@ -35,6 +36,8 @@ public class CharacterMovement : MonoBehaviour
     void LateStart()
     {
         mentalMap = new MentalMap(this);
+        characterVision.mentalMap = mentalMap;
+        characterVision.OnMove(location);
     }
 
     /// <summary>
@@ -44,6 +47,7 @@ public class CharacterMovement : MonoBehaviour
     {
         location = movementPath[0];
         movementPath.RemoveAt(0);
+        characterVision.OnMove(location);
         if (movementPath.Count != 0)
         {
             Invoke("Move", moveTime);

@@ -15,7 +15,42 @@ public class MentalMap
     }
 
     /// <summary>
-    /// Adds a new hex to the personal map the character has. 
+    /// Adds a single hex to the character's mental map.
+    /// </summary>
+    /// <param name="hex">The hex to add.</param>
+    public void UpdateMap(Hex hex)
+    {
+        HexNode hexNode; 
+
+        if (!map.ContainsKey(hex.position))
+        {
+            hexNode = new HexNode(hex);
+            map[hex.position] = hexNode;
+        } else
+        {
+            hexNode = map[hex.position];
+        }
+
+        foreach (Hex neighbor in hex.neighbors)
+        {
+            if (!neighbor.walkable)
+            {
+                continue;
+            }
+            if (!map.ContainsKey(neighbor.position))
+            {
+                map[neighbor.position] = new HexNode(neighbor);
+            }
+
+            if (!hexNode.HasConnection(map[neighbor.position]))
+            {
+                hexNode.SetConnection(map[neighbor.position]);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Adds a new hex to the personal map the character has, only used during initial setup. 
     /// </summary>
     /// <param name="hex">The new hex the character can think about pathing to.</param>
     /// <returns></returns>

@@ -9,8 +9,8 @@ public class Hex : MonoBehaviour
     [SerializeField] public bool walkable;
     [SerializeField] public float rotateTime;
     public List<Hex> neighbors { get; private set; }
-    public bool isExplored = false;
-    public bool isWater = false;
+    [SerializeField] public bool isExplored;
+    [SerializeField] public bool isWater;
 
     private float rotationPercent = 0;
     private Quaternion startingRotation;
@@ -32,6 +32,25 @@ public class Hex : MonoBehaviour
         transform.position = MapPositionToWorldPosition(position);
         startingRotation = transform.rotation;
         neighbors = new List<Hex>();
+
+        SetColor(Color.black);
+    }
+
+    /// <summary>
+    /// Sets the material color of the hex.
+    /// </summary>
+    /// <param name="color">the color to set the hex to.</param>
+    void SetColor(Color color)
+    {
+        foreach (Transform child in transform)
+        {
+            Renderer rend = child.GetComponent<Renderer>();
+            rend.material.shader = Shader.Find("_Color");
+            rend.material.SetColor("_Color", color);
+
+            rend.material.shader = Shader.Find("Specular");
+            rend.material.SetColor("_SpecColor", Color.clear);
+        }
     }
 
     /// <summary>
@@ -68,8 +87,12 @@ public class Hex : MonoBehaviour
     /// </summary>
     public void Explore()
     {
-        isExplored = true;
-        enabled = true;
+        if (!isExplored)
+        {
+            isExplored = true;
+            enabled = true;
+            SetColor(Color.white);
+        }
     }
 
     /// <summary>
