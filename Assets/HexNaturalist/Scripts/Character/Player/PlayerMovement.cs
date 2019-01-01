@@ -15,11 +15,5 @@ public class PlayerMovement : CharacterMovement
         {
             if (highlightedHex != null && highlightedHex.walkable) SetPath(mentalMap.GetPath(highlightedHex));
         }
-
-        if (Input.GetMouseButtonDown(middleMouse))
-            Debug.Log("Pressed secondary button.");
-
-        if (Input.GetMouseButtonDown(secondaryMouse))
-            Debug.Log("Pressed middle click.");
     }
 }

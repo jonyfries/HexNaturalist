@@ -5,11 +5,12 @@ using System.Linq;
 
 public class MentalMap
 {
-    Dictionary<Vector3Int, HexNode> map = new Dictionary<Vector3Int, HexNode>();
+    public Dictionary<Vector3Int, HexNode> map { get; private set; }
     public CharacterMovement character;
 
     public MentalMap(CharacterMovement characterMovement)
     {
+        map = new Dictionary<Vector3Int, HexNode>();
         this.character = characterMovement;
         AddHex(character.location);
     }

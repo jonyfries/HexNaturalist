@@ -22,10 +22,11 @@ public class CharacterMovement : MonoBehaviour
     public CharacterVision characterVision;
 
     [SerializeField] private Hex _location;
-    private List<Hex> movementPath;
+    public List<Hex> movementPath { get; private set; }
 
     void Start()
     {
+        movementPath = new List<Hex>();
         transform.position = location.GetWorldPosition();
         Invoke("LateStart", .1f);
     }
