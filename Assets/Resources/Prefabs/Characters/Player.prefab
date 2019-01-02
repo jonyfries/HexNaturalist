@@ -562,7 +562,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4841407053138796}
   - component: {fileID: 114346136747599280}
-  - component: {fileID: 114576836562114726}
+  - component: {fileID: 114688063412292198}
+  - component: {fileID: 114267445706830410}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1073,7 +1074,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1889792227841644}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 10, y: 0, z: 8.5}
+  m_LocalPosition: {x: -347.15, y: -141.67819, z: 0.375}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4765164429222802}
@@ -1193,6 +1194,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114267445706830410
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1889792227841644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f621f8c2311002649b3bbb4234990401, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveTime: 0.5
+  vision: {fileID: 114688063412292198}
+  controller: {fileID: 114346136747599280}
+  _location: {fileID: 0}
 --- !u!114 &114346136747599280
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1204,10 +1220,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c3f120885b9cf44809d282a890df4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveTime: 0.5
-  characterVision: {fileID: 114576836562114726}
-  _location: {fileID: 0}
---- !u!114 &114576836562114726
+  hasActions: 0
+  actionPoints: 5
+  remainingActionPoints: 0
+  movement: {fileID: 114267445706830410}
+--- !u!114 &114688063412292198
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1215,7 +1232,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1889792227841644}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6358f36ec2336647b84f2f26ff2c978, type: 3}
+  m_Script: {fileID: 11500000, guid: 793c77df2b4f50f4388a178f9385d971, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 1
