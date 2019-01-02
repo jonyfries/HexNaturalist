@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
+    public MentalMap mentalMap;
+    public float moveTime = .5f;
+    public CharacterVision vision;
+    public CharacterController controller;
+
+    public List<Hex> movementPath { get; private set; }
+    [SerializeField] private Hex _location;
+
     public Hex location
     {
         get
@@ -17,12 +25,6 @@ public class CharacterMovement : MonoBehaviour
             transform.position = location.GetWorldPosition();
         }
     }
-    public MentalMap mentalMap;
-    public float moveTime = .5f;
-    public CharacterVision characterVision;
-
-    [SerializeField] private Hex _location;
-    public List<Hex> movementPath { get; private set; }
 
     void Start()
     {
@@ -37,8 +39,8 @@ public class CharacterMovement : MonoBehaviour
     void LateStart()
     {
         mentalMap = new MentalMap(this);
-        characterVision.mentalMap = mentalMap;
-        characterVision.OnMove(location);
+        vision.mentalMap = mentalMap;
+        vision.OnMove(location);
     }
 
     /// <summary>
@@ -46,9 +48,20 @@ public class CharacterMovement : MonoBehaviour
     /// </summary>
     public void Move()
     {
-        location = movementPath[0];
+        Hex nextHex = movementPath[0];
+
+        if (nextHex.entryCost > controller.remainingActionPoints)
+        {
+            controller.hasActions = false;
+            return;
+        } else
+        {
+            controller.remainingActionPoints -= nextHex.entryCost;
+        }
+
+        location = nextHex;
         movementPath.RemoveAt(0);
-        characterVision.OnMove(location);
+        vision.OnMove(location);
         if (movementPath.Count != 0)
         {
             Invoke("Move", moveTime);

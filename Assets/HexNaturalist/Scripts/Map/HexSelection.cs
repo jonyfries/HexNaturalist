@@ -12,12 +12,12 @@ public class HexSelection : MonoBehaviour
     void OnMouseEnter()
     {
         highlight.SetHighlighted(true);
-        PlayerMovement.highlightedHex = hex;
+        PlayerController.highlightedHex = hex;
     }
 
     void OnMouseExit()
     {
         highlight.SetHighlighted(false);
-        if (PlayerMovement.highlightedHex == hex) PlayerMovement.highlightedHex = null;
+        if (PlayerController.highlightedHex == hex) PlayerController.highlightedHex = null;
     }
 }
