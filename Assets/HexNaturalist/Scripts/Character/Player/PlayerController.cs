@@ -10,6 +10,7 @@ public class PlayerController : CharacterController
     static public Hex highlightedHex { get; set; }
 
     public CharacterMovement movement;
+    public UnityEngine.UI.Text actionText;
 
     void Update()
     {
@@ -18,5 +19,7 @@ public class PlayerController : CharacterController
             if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
                 if (highlightedHex != null && highlightedHex.walkable && highlightedHex.isExplored) movement.SetPath(movement.mentalMap.GetPath(highlightedHex));
         }
+
+        actionText.text = "Actions: " + remainingActionPoints.ToString() + "/" + actionPoints.ToString();
     }
 }
