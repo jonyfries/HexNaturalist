@@ -9,6 +9,7 @@ public class PlayerController : CharacterController
     const int secondaryMouse = 2;
     static public Hex highlightedHex { get; set; }
 
+    public MenuHandler menu;
     public CharacterMovement movement;
     public UnityEngine.UI.Text actionText;
 
@@ -18,6 +19,11 @@ public class PlayerController : CharacterController
         {
             if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
                 if (highlightedHex != null && highlightedHex.walkable && highlightedHex.isExplored) movement.SetPath(movement.mentalMap.GetPath(highlightedHex));
+        }
+
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            menu.GameMenu(true);
         }
 
         actionText.text = "Actions: " + remainingActionPoints.ToString() + "/" + actionPoints.ToString();
