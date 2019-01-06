@@ -28,29 +28,11 @@ public class Hex : MonoBehaviour
     /// </summary>
     void Awake()
     {
+        gameObject.SetActive(false);
         position.z = position.y & 1;
         transform.position = MapPositionToWorldPosition(position);
         startingRotation = transform.rotation;
         neighbors = new List<Hex>();
-
-        SetColor(Color.black);
-    }
-
-    /// <summary>
-    /// Sets the material color of the hex.
-    /// </summary>
-    /// <param name="color">the color to set the hex to.</param>
-    void SetColor(Color color)
-    {
-        foreach (Transform child in transform)
-        {
-            Renderer rend = child.GetComponent<Renderer>();
-            rend.material.shader = Shader.Find("_Color");
-            rend.material.SetColor("_Color", color);
-
-            rend.material.shader = Shader.Find("Specular");
-            rend.material.SetColor("_SpecColor", Color.clear);
-        }
     }
 
     /// <summary>
@@ -91,7 +73,7 @@ public class Hex : MonoBehaviour
         {
             isExplored = true;
             enabled = true;
-            SetColor(Color.white);
+            gameObject.SetActive(true);
         }
     }
 
