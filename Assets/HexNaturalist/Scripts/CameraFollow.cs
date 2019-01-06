@@ -20,7 +20,7 @@ public class CameraFollow : MonoBehaviour
 
     void Start()
     {
-        verticalOffset =  transform.position - target.position;
+        verticalOffset = new Vector3(0, 2, -2.5f);
     }
 
     void Update()

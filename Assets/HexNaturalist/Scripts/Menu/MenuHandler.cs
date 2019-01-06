@@ -27,7 +27,7 @@ public class MenuHandler : MonoBehaviour
     /// </summary>
     public void StartGame()
     {
-        SceneManager.LoadScene("HexNaturalist/Scenes/Game");
+        SceneManager.LoadScene("HexNaturalist/Scenes/Game", LoadSceneMode.Single);
     }
 
     /// <summary>
@@ -35,7 +35,7 @@ public class MenuHandler : MonoBehaviour
     /// </summary>
     public void MainMenu()
     {
-        SceneManager.LoadScene("HexNaturalist/Scenes/MainMenu");
+        SceneManager.LoadScene("HexNaturalist/Scenes/MainMenu", LoadSceneMode.Single);
     }
 
     /// <summary>
