@@ -280,6 +280,7 @@ MonoBehaviour:
   rotateTime: 1
   isExplored: 0
   isWater: 0
+  aspectList: 00000000
 --- !u!114 &114353017326276422
 MonoBehaviour:
   m_ObjectHideFlags: 1
