@@ -9,10 +9,14 @@ public class PlayerController : CharacterController
     const int secondaryMouse = 2;
     static public Hex highlightedHex { get; set; }
 
+    public int supplies;
     public MenuHandler menu;
     public CharacterMovement movement;
     public UnityEngine.UI.Text actionText;
 
+    /// <summary>
+    /// Check for player input
+    /// </summary>
     void Update()
     {
         if (Input.GetMouseButtonDown(primaryMouse))
@@ -27,5 +31,30 @@ public class PlayerController : CharacterController
         }
 
         actionText.text = "Actions: " + remainingActionPoints.ToString() + "/" + actionPoints.ToString();
+    }
+
+    /// <summary>
+    /// Process end of turn
+    /// </summary>
+    public override void OnEndTurn()
+    {
+        if (movement.location.aspectList.Contains(Hex.Aspect.Town))
+        {
+            supplies += 4;
+        }
+
+        if (supplies-- <= 0)
+        {
+            OutOfSupplies();
+        }
+    }
+
+    /// <summary>
+    /// End the game when the player runs out of supplies.
+    /// </summary>
+    void OutOfSupplies()
+    {
+        TurnManager.Instance.DestroyCharacter(this);
+        menu.GameOver();
     }
 }

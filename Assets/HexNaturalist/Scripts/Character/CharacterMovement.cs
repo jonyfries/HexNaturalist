@@ -65,6 +65,9 @@ public class CharacterMovement : MonoBehaviour
         if (movementPath.Count != 0)
         {
             Invoke("Move", moveTime);
+        } else
+        {
+            controller.hasActions = false;
         }
     }
 
@@ -74,7 +77,11 @@ public class CharacterMovement : MonoBehaviour
     /// <param name="newPath">Path for character to follow.</param>
     public void SetPath(List<Hex> newPath)
     {
-        if (newPath.Count == 0) return;
+        if (newPath.Count == 0)
+        {
+            movementPath = newPath;
+            return;
+        }
 
         if (newPath[0] == location)
         {

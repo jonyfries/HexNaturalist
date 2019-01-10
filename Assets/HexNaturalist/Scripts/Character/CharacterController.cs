@@ -40,10 +40,10 @@ public class CharacterController : MonoBehaviour
     /// </summary>
     public void EndTurn()
     {
-        OnEndTurn();
         remainingActionPoints = 0;
         enabled = false;
         TurnManager.Instance.EndTurn(this);
+        OnEndTurn();
     }
 
     /// <summary>

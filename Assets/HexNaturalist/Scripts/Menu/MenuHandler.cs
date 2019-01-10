@@ -9,6 +9,7 @@ public class MenuHandler : MonoBehaviour
     public CharacterController playerController;
     public Canvas menu;
     public Canvas gameHUD;
+    public Canvas gameOver;
 
     /// <summary>
     /// Closes the game entirely.
@@ -47,5 +48,12 @@ public class MenuHandler : MonoBehaviour
         playerController.enabled = !showGameMenu;
         gameHUD.enabled = !showGameMenu;
         menu.enabled = showGameMenu;
+    }
+
+    public void GameOver()
+    {
+        playerController.enabled = false;
+        gameHUD.enabled = true;
+        gameOver.enabled = true;
     }
 }

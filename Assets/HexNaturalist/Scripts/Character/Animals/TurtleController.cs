@@ -7,7 +7,6 @@ public class TurtleController : CharacterController
 {
     public CharacterMovement characterMovement;
     public MentalMap mentalMap;
-    public bool isDeciding;
 
     /// <summary>
     /// Controller setup.
@@ -25,7 +24,6 @@ public class TurtleController : CharacterController
     void LateStart()
     {
         mentalMap = characterMovement.mentalMap;
-        enabled = true;
     }
 
     /// <summary>
@@ -54,6 +52,5 @@ public class TurtleController : CharacterController
     {
         List<Hex> path = mentalMap.GetPath(mentalMap.map.ElementAt(Random.Range(0, mentalMap.map.Count)).Value.hex);
         characterMovement.SetPath(path);
-        isDeciding = false;
     }
 }

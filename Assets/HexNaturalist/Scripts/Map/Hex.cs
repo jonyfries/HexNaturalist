@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Hex : MonoBehaviour
 {
+    public enum Aspect { Town, Water, Deciduous, Coniferous, Snowy }
+
     [SerializeField] public Vector3Int position;
     [SerializeField] public int entryCost;
     [SerializeField] public bool walkable;
@@ -11,6 +13,7 @@ public class Hex : MonoBehaviour
     public List<Hex> neighbors { get; private set; }
     [SerializeField] public bool isExplored;
     [SerializeField] public bool isWater;
+    [SerializeField] public List<Aspect> aspectList = new List<Aspect>();
 
     private float rotationPercent = 0;
     private Quaternion startingRotation;
