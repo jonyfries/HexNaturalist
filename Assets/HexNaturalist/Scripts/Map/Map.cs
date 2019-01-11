@@ -58,7 +58,7 @@ public class Map : Singleton<Map>
         {
             if (mapHex.neighbors.Count != 6)
             {
-                if (!mapHex.isWater)
+                if (!mapHex.aspectList.Contains(Hex.Aspect.Ocean))
                 {
                     mapFringe.Add(mapHex);
                 }
