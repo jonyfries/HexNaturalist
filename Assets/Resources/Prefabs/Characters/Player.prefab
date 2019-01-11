@@ -1185,7 +1185,7 @@ Animator:
   m_GameObject: {fileID: 1460626822041786}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: e6f8c6b4cd0c5d24fbefebd224edfdb5, type: 3}
-  m_Controller: {fileID: 9100000, guid: 85a638439e437b640b28d7616bad1102, type: 2}
+  m_Controller: {fileID: 9100000, guid: 4bc3bed576bcf9c4794c775b6ee51a50, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -1205,10 +1205,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f621f8c2311002649b3bbb4234990401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveTime: 0.5
   vision: {fileID: 114688063412292198}
   controller: {fileID: 114346136747599280}
+  animator: {fileID: 95420562644078370}
   _location: {fileID: 0}
+  moveTime: 1
+  rotateTime: 0.2
 --- !u!114 &114346136747599280
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1223,6 +1225,7 @@ MonoBehaviour:
   hasActions: 0
   actionPoints: 5
   remainingActionPoints: 0
+  supplies: 2
   menu: {fileID: 0}
   movement: {fileID: 114267445706830410}
   actionText: {fileID: 0}

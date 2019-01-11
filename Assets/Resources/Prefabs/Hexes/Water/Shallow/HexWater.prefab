@@ -175,7 +175,7 @@ MonoBehaviour:
   walkable: 0
   rotateTime: 1
   isExplored: 0
-  isWater: 1
+  aspectList: 00000000
 --- !u!114 &114869955313448986
 MonoBehaviour:
   m_ObjectHideFlags: 1

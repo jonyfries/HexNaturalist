@@ -219,4 +219,4 @@ MonoBehaviour:
   walkable: 0
   rotateTime: 1
   isExplored: 0
-  isWater: 1
+  aspectList: 00000000
