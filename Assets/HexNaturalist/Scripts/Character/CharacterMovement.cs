@@ -37,12 +37,14 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets up the character movement to be ready to process.
+    /// </summary>
     void Start()
     {
         movementPath = new List<Hex>();
-        transform.position = location.GetWorldPosition();
-        Invoke("LateStart", .1f);
         enabled = false;
+        Invoke("LateStart", .1f);
     }
 
     /// <summary>
@@ -51,6 +53,7 @@ public class CharacterMovement : MonoBehaviour
     void LateStart()
     {
         mentalMap = new MentalMap(this);
+        transform.position = location.GetWorldPosition();
         vision.mentalMap = mentalMap;
         vision.OnMove(location);
     }
@@ -106,6 +109,17 @@ public class CharacterMovement : MonoBehaviour
         location = nextHex;
         movementPath.RemoveAt(0);
         vision.OnMove(location);
+    }
+
+    /// <summary>
+    /// Used to set the characters current position. Should only be used to teleport a character or to place them at the start of the game.
+    /// </summary>
+    /// <param name="target">Hex where the character should now be located.</param>
+    public void SetCurrentHex(Hex target)
+    {
+        transform.position = target.GetWorldPosition();
+        location = target;
+        Invoke("LateStart", .1f);
     }
 
     /// <summary>

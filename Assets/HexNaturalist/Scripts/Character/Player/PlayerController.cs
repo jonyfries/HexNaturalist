@@ -10,9 +10,10 @@ public class PlayerController : CharacterController
     static public Hex highlightedHex { get; set; }
 
     public int supplies;
-    public MenuHandler menu;
+    public GameMenu menu;
     public CharacterMovement movement;
     public UnityEngine.UI.Text actionText;
+    public UnityEngine.UI.Text suppliesText;
 
     /// <summary>
     /// Check for player input
@@ -27,7 +28,7 @@ public class PlayerController : CharacterController
 
         if (Input.GetKey(KeyCode.Escape))
         {
-            menu.GameMenu(true);
+            menu.ShowGameMenu(true);
         }
 
         actionText.text = "Actions: " + remainingActionPoints.ToString() + "/" + actionPoints.ToString();

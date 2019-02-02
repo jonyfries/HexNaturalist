@@ -67,8 +67,20 @@ public class TurnManager : Singleton<TurnManager>
     /// Add a character to the turn order.
     /// </summary>
     /// <param name="character">Character to add.</param>
-    public void SubscribeCharacter(CharacterController character)
+    public void SubscribeCharacter(CharacterController character, bool isPlayer=false)
     {
         characterList.Add(character);
+        if (isPlayer)
+        {
+            player = character;
+        }
+    }
+
+    /// <summary>
+    /// Handles when the player pushes the end turn button.
+    /// </summary>
+    public void EndTurnButtonPress()
+    {
+        player.EndTurn();
     }
 }
