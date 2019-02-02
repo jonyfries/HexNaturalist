@@ -67,13 +67,10 @@ public class TurnManager : Singleton<TurnManager>
     /// Add a character to the turn order.
     /// </summary>
     /// <param name="character">Character to add.</param>
-    public void SubscribeCharacter(CharacterController character, bool isPlayer=false)
+    public void SubscribeCharacter(CharacterController character)
     {
         characterList.Add(character);
-        if (isPlayer)
-        {
-            player = character;
-        }
+        character.transform.parent = transform;
     }
 
     /// <summary>

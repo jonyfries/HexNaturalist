@@ -10,13 +10,11 @@ public class CharacterSetup : MonoBehaviour
     public UnityEngine.UI.Text suppliesText;
     public CharacterName characterName;
     public List<GameObject> characterPrefabs;
-    public GameObject turnManager;
     public CameraFollow camera;
 
     void Awake()
     {
         characterName = GameInformation.Instance.characterName;
-        print(characterName);
 
         // Create the player
         GameObject character = Instantiate(characterPrefabs[(int)characterName]) as GameObject;
@@ -35,9 +33,5 @@ public class CharacterSetup : MonoBehaviour
 
         //setup the camera
         camera.target = character.transform;
-
-        //setup turn manager
-        turnManager.GetComponent<TurnManager>().SubscribeCharacter(controller, true);
-        character.transform.parent = turnManager.transform;
     }
 }

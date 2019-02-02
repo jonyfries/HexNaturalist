@@ -15,6 +15,12 @@ public class PlayerController : CharacterController
     public UnityEngine.UI.Text actionText;
     public UnityEngine.UI.Text suppliesText;
 
+    void Start()
+    {
+        TurnManager.Instance.SubscribeCharacter(this);
+        TurnManager.Instance.player = this;
+    }
+
     /// <summary>
     /// Check for player input
     /// </summary>
